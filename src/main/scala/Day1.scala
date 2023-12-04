@@ -1,4 +1,4 @@
-import java.lang.String
+import scala.util.boundary, boundary.break
 @main def Day1: Unit =
 	println("First Part:")
 	println(firstPart)
@@ -11,6 +11,8 @@ val stringSrc =
   finally source.close()
 val lines = stringSrc.split('\n')
 
+val nums =  Array("one", "two", "three", "four", "five", "six", "seven", "eight", "nine").zip('1' to '9')
+
 val digits = lines.map(_.filter(Character.isDigit))
 val numbers = digits.map(firstAndLastDigit(_).toInt)
 
@@ -20,15 +22,13 @@ val secondPart = lines.map(x=>firstAndLastDigit(replaceTextWithDigits(x).filter(
 def firstAndLastDigit(str: String) = str.head + str.takeRight(1)
 def replaceTextWithDigits(str: String) : String = str match {
 	case "" => ""
-	case xs if xs.startsWith("one") => '1' + replaceTextWithDigits(xs.tail)
-	case xs if xs.startsWith("two") => '2' + replaceTextWithDigits(xs.tail)
-	case xs if xs.startsWith("three") => '3' + replaceTextWithDigits(xs.tail)
-	case xs if xs.startsWith("four") => '4' + replaceTextWithDigits(xs.tail)
-	case xs if xs.startsWith("five") => '5' + replaceTextWithDigits(xs.tail)
-	case xs if xs.startsWith("six") => '6' + replaceTextWithDigits(xs.tail)
-	case xs if xs.startsWith("seven") => '7' + replaceTextWithDigits(xs.tail)
-	case xs if xs.startsWith("eight") => '8' + replaceTextWithDigits(xs.tail)
-	case xs if xs.startsWith("nine") => '9' + replaceTextWithDigits(xs.tail)
-	case xs => xs.head + replaceTextWithDigits(xs.tail)
-
+	case xs => asd(xs) + replaceTextWithDigits(xs.tail)
+}
+def asd(str:String):Char = {
+	var num = str.head
+	boundary: 
+		for (x <- nums) if str.startsWith(x(0)) then  
+			num = x(1)
+			break()
+	return num
 }
