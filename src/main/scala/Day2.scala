@@ -1,4 +1,5 @@
 import scala.util.boundary, boundary.break
+import java.awt.Color
 class Day2 {
   def print: Unit = {
 
@@ -22,10 +23,10 @@ class Day2 {
   val gameStrings = lines.map(_.filter(_!=' ').split(':').last.split(';'))
   val games = gameStrings.map(y=>y.map(x => splitRounds(x)))
   val gamesPossible = games.map(x=> x.forall(roundPossible)).zip(LazyList.from(1))
-
+  val maxColors = games.map(x => x.reduce(maxColor))
 
   val firstPart = gamesPossible.filter(_(0)).map(_(1)).sum
-  val secondPart = "TODO"
+  val secondPart = maxColors.map(calcPower).sum
 
   def splitRounds(str: String) : Colors =
     var color = new Colors()
@@ -38,6 +39,15 @@ class Day2 {
 
   def roundPossible(color:Colors) : Boolean = 
     color.red <= 12 && color.green <= 13 && color.blue <= 14
+
+  def maxColor(a:Colors, b:Colors):Colors = 
+    if (b.red > a.red) then a.red = b.red
+    if (b.blue > a.blue) then a.blue = b.blue
+    if (b.green > a.green) then a.green = b.green
+    a
+  
+  def calcPower(color : Colors) : Int = 
+    color.red * color.green * color.blue
   
   class Colors {
     var red:Int = 0;
