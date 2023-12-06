@@ -11,7 +11,7 @@ class DayX {
   val stringSrc =
     try source.mkString
     finally source.close()
-  val lines = stringSrc.split('\n')
+  val lines = stringSrc.split("\r\n")
 
   val firstPart = "TODO"
   val secondPart = "TODO"
