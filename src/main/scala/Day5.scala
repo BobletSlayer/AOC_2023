@@ -5,11 +5,7 @@ class Day5 {
     println(firstPart)
     println("Second Part:")
     println(secondPart)
-    // println(asd.mkString(" "))
 
-    // println(toDestinationNumber(locationMaps(0), 79))
-    // println(toDestinationNumber(locationMaps(1), 14))
-    // println((locationMaps(1).mkString("\n")))
   }
 
   private val source = scala.io.Source.fromFile("Input\\5\\input.txt")
@@ -25,9 +21,7 @@ class Day5 {
   val firstPart =
     seeds.map(seed => calcSeed(locationMaps.toIndexedSeq, seed)).min
   val secondPart =
-    // asd.map(seed => calcSeed(locationMaps.toIndexedSeq, seed)).min
-    dsa(seeds.toList).map(asd).min
-    // asd((79,98))
+    seedsToRanges(seeds.toList).map(minFromRange).min
 
   def locationMapTofarmMaps(strs: Seq[String]) =
     strs.tail.map(lineToFarmMap)
@@ -46,21 +40,19 @@ class Day5 {
       case None            => seed
       case Some((_, _, f)) => f(seed)
 
-  def asd(x:(BigInt,BigInt)) = x match
-   case (start,end) =>
-    var i = start
-    var min = calcSeed(locationMaps.toIndexedSeq, i)
-    while i < end 
-    do 
-      val n = calcSeed(locationMaps.toIndexedSeq, i)
-      i+=1
-      if n < min then min = n
-    min
-  
-  def dsa(seq:List[BigInt]):List[(BigInt,BigInt)] = seq match
-    case x1::x2::xs => (x1,x1+x2) +: dsa(xs)
-    case _ => Nil
-  
+  def minFromRange(x: (BigInt, BigInt)) = x match
+    case (start, end) =>
+      var i = start
+      var min = calcSeed(locationMaps.toIndexedSeq, i)
+      while i < end
+      do
+        val n = calcSeed(locationMaps.toIndexedSeq, i)
+        i += 1
+        if n < min then min = n
+      min
 
+  def seedsToRanges(seq: List[BigInt]): List[(BigInt, BigInt)] = seq match
+    case x1 :: x2 :: xs => (x1, x1 + x2) +: seedsToRanges(xs)
+    case _              => Nil
 
 }

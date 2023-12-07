@@ -7,11 +7,6 @@ class Day3 {
     println(firstPart)
     println("Second Part:")
     println(secondPart)
-    // println(findNum(0, 0))
-    // println(lines(0)(0))
-    // println(lines(0)(0).isDigit)
-    // println(lines.mkString("\n"))
-    // println(generateAdjacentPositions(0, 0).filter(positionInArray))
   }
 
   private val source = scala.io.Source.fromFile("Input\\3\\input.txt")
@@ -29,8 +24,6 @@ class Day3 {
     lines.zipWithIndex.map(x => lineToNumbers(x(0), x(1))).flatten.sum
   val secondPart =
     lines.zipWithIndex.map(findGears).flatten.map(processGear).sum
-  // val asd =
-  //   lines.drop(1).zipWithIndex.map(findGears).flatten.map(processGear).sum
 
   def lineToNumbers(
       line: String,

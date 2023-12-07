@@ -6,6 +6,7 @@
         case 3 =>  (new Day3()).print
         case 4 =>  (new Day4()).print
         case 5 =>  (new Day5()).print
+        case 6 =>  (new Day6()).print
         case x => println(":(")
     }
 
