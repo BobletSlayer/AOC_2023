@@ -20,10 +20,10 @@ class Day1 {
     val firstPart = numbers.sum
     val secondPart = lines.map(x=>firstAndLastDigit(replaceTextWithDigits(x).filter(Character.isDigit)).toInt).sum
 
-    def firstAndLastDigit(str: String) = str.head + str.takeRight(1)
+    def firstAndLastDigit(str: String) = str.head +: str.takeRight(1)
     def replaceTextWithDigits(str: String) : String = str match {
         case "" => ""
-        case xs => replacetext(xs) + replaceTextWithDigits(xs.tail)
+        case xs => replacetext(xs) +: replaceTextWithDigits(xs.tail)
     }
     def replacetext(str:String):Char = {
         var num = str.head

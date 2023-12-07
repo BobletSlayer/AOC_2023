@@ -16,11 +16,11 @@ class Day4 {
   val parsed = lines.map(parseInput)
 
   val firstPart =parsed.map((x,y) => 😲(1,x.intersect(y).length,_*2)).toList.sum
-  val secondPart = asd(parsed.map((x,y) => x.intersect(y).length).zip(LazyList.continually(1)).toList)
+  val secondPart = calcTotal(parsed.map((x,y) => x.intersect(y).length).zip(LazyList.continually(1)).toList)
 
-  def asd (wonCards: Seq[(Int,Int)]):Int = wonCards match
+  def calcTotal (wonCards: List[(Int,Int)]):Int = wonCards match
     case Nil => 0
-    case (x,y)::xs => y + asd(xs.take(x).map((a,b) => (a,b+y)) ++ xs.drop(x))
+    case (x,y)::xs => y + calcTotal(xs.take(x).map((a,b) => (a,b+y)) ++ xs.drop(x))
 
   def 😲(a:Int, b:Int, f:(Int => Int)):Int = b match
     case 0 => 0
